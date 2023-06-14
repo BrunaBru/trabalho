@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { TarefaService } from "./tarefa.service";
 import { TarefaEntity } from "./tarefa.entity";
-import { TarefaDto } from "./tarefa.tarefa.Dto";
+import { TarefaDto } from "./tarefa.tarefaDto";
 
 @Controller('tarefas')
 export class TarefaController{

@@ -1,6 +1,7 @@
 import { Column,Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { GeneroEnum } from "./genero.enum";
 import { TarefaEntity } from 'src/tarefa/tarefa.entity';
+import { DespesaEntity } from "src/despesa/despesa.entity";
 
 @Entity({ name: 'usuarios' })
 export class UsuarioEntity {
@@ -32,10 +33,22 @@ export class UsuarioEntity {
         (tarefa) => tarefa.usuario,
         { eager: true },
       )
-      @JoinColumn({
+    @JoinColumn({
         name: 'tarefa_id',
         foreignKeyConstraintName: 'tarefa_fk',
         referencedColumnName: 'id',
-      })
-      tarefa: TarefaEntity;
+    })
+    tarefa: TarefaEntity;
+
+    @ManyToOne(
+       () => DespesaEntity,
+       (despesa) => despesa.usuario,
+       { eager: true },
+    )
+    @JoinColumn({
+       name: 'despesa_id',
+       foreignKeyConstraintName: 'despesa_fk',
+       referencedColumnName: 'id',
+    })
+    despesa: DespesaEntity;
 }
