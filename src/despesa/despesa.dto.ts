@@ -2,6 +2,7 @@ import { IsOptional, IsString, IsUUID, IsNotEmpty, IsDateString, IsEnum, IsNumbe
 import { CategoriaEnum } from "./categoria.enum";
 import { Type } from "class-transformer";
 import { UsuarioDto } from "src/usuario/usuario.dto";
+import { Decimal128, Long } from "typeorm";
 
 export class DespesaDto{
     @IsUUID()
@@ -22,7 +23,7 @@ export class DespesaDto{
 
     @IsNumber()
     @IsNotEmpty()
-    valor:number;
+    valor:Number;
     
     @IsOptional()
     @Type(() => UsuarioDto)
