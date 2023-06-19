@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { TarefaEntity } from './tarefa.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TarefaDto } from './tarefa.tarefaDto';
+import { TarefaDto } from './tarefa.dto';
 
 @Injectable()
 export class TarefaService {
@@ -15,16 +15,10 @@ export class TarefaService {
     return this.tarefaRepository.find();
   }
 
-  async findById(
-    id: string,
-    relations: string[] = [],
-  ): Promise<TarefaEntity> {
-    const tarefa = await this.tarefaRepository.findOne({
-      relations,
-      where: { id },
-    });
-    if (!tarefa) {
-      throw new NotFoundException('tarefa não encontrada');
+  async findById(id: string): Promise<TarefaEntity> {
+    const tarefa = await this.tarefaRepository.findOne({ where: { id }});
+    if (tarefa == null) {
+      throw new NotFoundException(`tarefa de id${id} não encontrada`);
     }
     return tarefa;
   }
@@ -35,13 +29,13 @@ export class TarefaService {
     return { ...findById, id};
 }
 
-async create(dto:TarefaDto){
-    const newTarefa = this.tarefaRepository.create(dto);
-    return this.tarefaRepository.save(newTarefa);
-}
+  async create(dto:TarefaDto){
+      const newTarefa = await this.tarefaRepository.create();
+      return this.tarefaRepository.save(newTarefa);
+  }
 
-async update({id, ...dto} : TarefaDto){
-    await this.findById(id);
-    return this.tarefaRepository.save({id, ...dto});
-}
+  async update(dto : TarefaDto){
+    const findById = await this.findById(dto.id);
+      return this.tarefaRepository.save(findById);
+  }
 }

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { UsuarioService } from "./usuario.service";
 import { UsuarioEntity } from "./usuario.entity";
-import { UsuarioDto } from "./usuario.usuarioDto";
+import { UsuarioDto } from "./usuario.dto";
 
 @Controller('usuarios')
 export class UsuarioController{
@@ -19,17 +19,17 @@ export class UsuarioController{
     }
 
     @Delete(':id')
-    remove (@Param('id') id :string){
-        return this.usuarioService.remove(id);
+    async remove (@Param('id') id :string){
+        return await this.usuarioService.remove(id);
     }
 
     @Post()
-    create(@Body() dto: UsuarioDto){
-        return this.usuarioService.create(dto);
+    async create(@Body() dto: UsuarioDto){
+        return await this.usuarioService.create(dto);
     }
 
     @Put(':id')
-    update(@Param('id') id: string, @Body() dto: UsuarioDto){
-        return this.usuarioService.update({ ...dto, id});
+    async update(@Param('id') id: string, @Body() dto: UsuarioDto){
+        return await this.usuarioService.update({ ...dto, id});
     }
 }

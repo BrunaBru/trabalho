@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsOptional, IsString, IsUUID, IsEnum, ValidateNested, IsDateString } from 'class-validator';
 import { PrioridadeEnum } from './prioridade.enum';
-import { UsuarioDto } from 'src/usuario/usuario.usuarioDto';
+import { UsuarioDto } from 'src/usuario/usuario.dto';
 import { Type } from 'class-transformer';
 
 export class TarefaDto {

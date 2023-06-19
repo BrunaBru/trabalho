@@ -1,7 +1,7 @@
 import { IsOptional, IsString, IsUUID, IsNotEmpty, IsDateString, IsEnum, IsNumber, ValidateNested } from "class-validator";
 import { CategoriaEnum } from "./categoria.enum";
 import { Type } from "class-transformer";
-import { UsuarioDto } from "src/usuario/usuario.usuarioDto";
+import { UsuarioDto } from "src/usuario/usuario.dto";
 
 export class DespesaDto{
     @IsUUID()
