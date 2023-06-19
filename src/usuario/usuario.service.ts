@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { Repository } from "typeorm";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import { IsNull, Repository } from "typeorm";
 import { UsuarioEntity } from "./usuario.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UsuarioDto } from "./usuario.dto";
+import { isEmpty } from "rxjs";
 
 @Injectable()
 export class UsuarioService{
@@ -31,12 +32,28 @@ export class UsuarioService{
     }
 
     async create(dto:UsuarioDto){
+        this.validate(dto);
         const newUsuario = this.usuarioRepository.create(dto);
         return this.usuarioRepository.save(newUsuario);
     }
 
     async update({id, ...dto} : UsuarioDto){
+        this.validate(dto);
         await this.findById(id);
         return this.usuarioRepository.save({id, ...dto});
     }
+
+    validate(dto: UsuarioDto) {
+        if (new Date().getTime() < new Date(dto.nascimento).getTime()) {
+          throw new BadRequestException(
+            'A data de nascimento do usuario nao pode ser igual hoje',
+          );
+        }
+        if (dto.email == null ){
+            throw new BadRequestException(`O e-mail deve ser informado`);
+        }      
+        if (dto.nome == null ){
+            throw new BadRequestException(`O nome é obrigatorio`);
+        }
+      }
 }

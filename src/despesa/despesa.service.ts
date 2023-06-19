@@ -36,15 +36,20 @@ export class DespesaService {
   }
   
   async update(dto : DespesaDto){
+    this.validate(dto);
     const findById = await this.findById(dto.id);
     return this.despesaRepository.save(findById);
   }
 
   validate(dto: DespesaDto) {
-    if (new Date().getTime() < new Date(dto.data).getTime()) {
-      throw new BadRequestException(
-        'A data da despesa é a mesma de hoje',
-      );
+    if (dto.categoria == null) {
+      throw new BadRequestException(`Informe uma categoria`);
+    }
+    if (dto.descricao == null){
+        throw new BadRequestException(`Informe uma descrição para a despesa`);
+    }
+    if(dto.valor == 0){
+      throw new BadRequestException (`O valor da despesa não pode ser zerado`);
     }
   }
 

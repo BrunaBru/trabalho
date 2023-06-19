@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { TarefaEntity } from './tarefa.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -30,12 +30,28 @@ export class TarefaService {
 }
 
   async create(dto:TarefaDto){
-      const newTarefa = await this.tarefaRepository.create();
-      return this.tarefaRepository.save(newTarefa);
+    this.validate(dto);
+    const newTarefa = await this.tarefaRepository.create();
+    return this.tarefaRepository.save(newTarefa);
   }
 
   async update(dto : TarefaDto){
+    this.validate(dto);
     const findById = await this.findById(dto.id);
-      return this.tarefaRepository.save(findById);
+    return this.tarefaRepository.save(findById);
+  }
+
+  validate(dto: TarefaDto) {
+    if (new Date(dto.dataInicial).getTime() < new Date().getTime()) {
+      throw new BadRequestException(
+        'A data inicial da tarefa nao pode ser menor que hoje',
+      );
+    }
+    if (dto.descricao == null ){
+        throw new BadRequestException(`A descrição da tarefa é obrigatoria`);
+    }      
+    if (new Date(dto.dataInicial).getTime()  == null ){
+        throw new BadRequestException(`Tarefa deve ter uma data final`);
+    }
   }
 }
