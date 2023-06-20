@@ -31,7 +31,7 @@ export class TarefaService {
 
   async create(dto:TarefaDto){
     this.validate(dto);
-    const newTarefa = await this.tarefaRepository.create();
+    const newTarefa = this.tarefaRepository.create(dto);
     return this.tarefaRepository.save(newTarefa);
   }
 

@@ -4,7 +4,7 @@ import { GeneroEnum } from "./genero.enum";
 export class UsuarioDto{
     @IsUUID()
     @IsOptional()
-    id?: string;
+    id: string;
 
     @IsString()
     @IsNotEmpty()

@@ -24,8 +24,8 @@ export class TarefaController{
     }
 
     @Post()
-    async create(@Body() dto: TarefaDto){
-        return await this.tarefaService.create(dto);
+    create(@Body() dto: TarefaDto){
+        return this.tarefaService.create(dto);
     }
 
     @Put(':id')

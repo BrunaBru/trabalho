@@ -27,5 +27,5 @@ export class TarefaDto {
   @IsOptional()
   @Type(() => UsuarioDto)
   @ValidateNested()
-  usuario?: UsuarioDto;
+  usuario: UsuarioDto;
 }

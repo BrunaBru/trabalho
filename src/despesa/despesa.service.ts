@@ -31,7 +31,7 @@ export class DespesaService {
   
   async create(dto:DespesaDto){
     this.validate(dto);
-    const newDespesa = this.despesaRepository.create();
+    const newDespesa = this.despesaRepository.create(dto);
     return this.despesaRepository.save(newDespesa);
   }
   
@@ -48,7 +48,7 @@ export class DespesaService {
     if (dto.descricao == null){
         throw new BadRequestException(`Informe uma descrição para a despesa`);
     }
-    if(dto.valor == 0){
+    if( dto.valor == null){
       throw new BadRequestException (`O valor da despesa não pode ser zerado`);
     }
   }

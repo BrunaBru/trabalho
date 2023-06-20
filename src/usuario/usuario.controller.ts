@@ -24,8 +24,8 @@ export class UsuarioController{
     }
 
     @Post()
-    async create(@Body() dto: UsuarioDto){
-        return await this.usuarioService.create(dto);
+    create(@Body() dto: UsuarioDto){
+        return this.usuarioService.create(dto);
     }
 
     @Put(':id')

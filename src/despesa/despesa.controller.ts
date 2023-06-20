@@ -23,8 +23,8 @@ export class DespesaController{
     }
 
     @Post()
-    async create(@Body() dto: DespesaDto){
-        return await this.despesaService.create(dto);
+    create(@Body() dto: DespesaDto){
+        return this.despesaService.create(dto);
     }
 
     @Put(':id')

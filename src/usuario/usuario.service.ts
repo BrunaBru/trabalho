@@ -37,10 +37,10 @@ export class UsuarioService{
         return this.usuarioRepository.save(newUsuario);
     }
 
-    async update({id, ...dto} : UsuarioDto){
+    async update(dto : UsuarioDto){
         this.validate(dto);
-        await this.findById(id);
-        return this.usuarioRepository.save({id, ...dto});
+        await this.findById(dto.id);
+        return this.usuarioRepository.save(dto);
     }
 
     validate(dto: UsuarioDto) {
