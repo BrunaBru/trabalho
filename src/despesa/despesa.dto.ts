@@ -3,14 +3,14 @@ import { CategoriaEnum } from "./categoria.enum";
 import { Type } from "class-transformer";
 import { UsuarioDto } from "src/usuario/usuario.dto";
 
-export class DespesaDto{
+export class DespesaDto {
     @IsUUID()
     @IsOptional()
     id: string;
 
     @IsString()
     @IsNotEmpty()
-    descricao:string;
+    descricao: string;
 
     @IsEnum(CategoriaEnum)
     @IsOptional()
@@ -18,14 +18,9 @@ export class DespesaDto{
 
     @IsDateString()
     @IsOptional()
-    data?: Date | string; 
+    data?: Date | string;
 
     @IsNumber()
     @IsNotEmpty()
-    valor:Number;
-    
-    @IsOptional()
-    @Type(() => UsuarioDto)
-    @ValidateNested()
-    usuario: UsuarioDto;
+    valor: Number;
 }

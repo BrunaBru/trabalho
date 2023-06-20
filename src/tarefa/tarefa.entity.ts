@@ -1,4 +1,4 @@
-import { Column,Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column,Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { PrioridadeEnum } from "./prioridade.enum";
 import { UsuarioEntity } from 'src/usuario/usuario.entity';
 
@@ -24,6 +24,6 @@ export class TarefaEntity {
     @Column({ type: 'date', name: 'dataFinal', nullable : true})
     dataFinal?: Date;
     
-    @OneToMany(() => UsuarioEntity, (usuario) => usuario.tarefa)
+    @ManyToOne(() => UsuarioEntity, (usuario) => usuario.tarefa)
     usuario: UsuarioEntity[];
 }

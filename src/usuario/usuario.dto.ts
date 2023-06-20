@@ -1,5 +1,6 @@
-import { IsOptional, IsString, IsUUID, IsNotEmpty, IsDateString, IsEnum } from "class-validator";
+import { IsOptional, IsString, IsUUID, IsNotEmpty, IsDateString, IsEnum, ValidateNested } from "class-validator";
 import { GeneroEnum } from "./genero.enum";
+import { TarefaDto } from "src/tarefa/tarefa.dto";
 
 export class UsuarioDto{
     @IsUUID()
@@ -25,4 +26,5 @@ export class UsuarioDto{
     @IsEnum(GeneroEnum)
     @IsOptional()
     genero?: GeneroEnum;
+
 }

@@ -5,7 +5,7 @@ import { Type } from 'class-transformer';
 
 export class TarefaDto {
   @IsUUID()
-  @IsNotEmpty()
+  @IsOptional()
   id: string;
 
   @IsOptional()
@@ -24,8 +24,4 @@ export class TarefaDto {
   @IsOptional()
   prioridade?: PrioridadeEnum;
   
-  @IsOptional()
-  @Type(() => UsuarioDto)
-  @ValidateNested()
-  usuario: UsuarioDto;
 }

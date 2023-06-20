@@ -1,4 +1,4 @@
-import { Column,Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Column,Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { GeneroEnum } from "./genero.enum";
 import { TarefaEntity } from 'src/tarefa/tarefa.entity';
 import { DespesaEntity } from "src/despesa/despesa.entity";
@@ -28,7 +28,7 @@ export class UsuarioEntity {
     })
     genero: GeneroEnum;
 
-    @ManyToOne(
+    @OneToMany(
         () => TarefaEntity,
         (tarefa) => tarefa.usuario,
         { eager: true },
@@ -38,9 +38,9 @@ export class UsuarioEntity {
         foreignKeyConstraintName: 'tarefa_fk',
         referencedColumnName: 'id',
     })
-    tarefa: TarefaEntity;
+    tarefa: TarefaEntity[];
 
-    @ManyToOne(
+    @OneToMany(
        () => DespesaEntity,
        (despesa) => despesa.usuario,
        { eager: true },

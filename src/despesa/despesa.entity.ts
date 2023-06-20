@@ -1,4 +1,4 @@
-import { Column,Decimal128,Entity, NumericType, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Column,Decimal128,Entity, ManyToMany, ManyToOne, NumericType, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 import { CategoriaEnum } from "./categoria.enum";
 import { UsuarioEntity } from 'src/usuario/usuario.entity';
 
@@ -24,6 +24,6 @@ export class DespesaEntity {
     @Column({ type: 'float', name: 'valor', nullable : true})
     valor?: Number;
     
-    @OneToMany(() => UsuarioEntity, (usuario) => usuario.despesa)
+    @ManyToOne(() => UsuarioEntity, (usuario) => usuario.despesa)
     usuario: UsuarioEntity[];
 }
