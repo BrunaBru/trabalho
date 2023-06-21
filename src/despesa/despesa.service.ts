@@ -15,6 +15,7 @@ export class DespesaService {
     return this.despesaRepository.find();
   }
 
+
   async findById(id: string): Promise<DespesaEntity> {
     const despesa = await this.despesaRepository.findOne({where :{id}});
     if (despesa == null) {
@@ -22,7 +23,6 @@ export class DespesaService {
     }
     return despesa;
   }
-
   async remove(id:string){
     const findById = await this.findById(id);
     await this.despesaRepository.remove(findById);
@@ -53,4 +53,21 @@ export class DespesaService {
     }
   }
 
+  async findPaginacao(id: string, page: number, limit: number, descricao?: string): Promise<DespesaEntity[]> {
+    const queryBuilder = this.despesaRepository.createQueryBuilder('despesa');
+    queryBuilder.where('despesa.id = :id', { id });
+  
+    if (descricao) {
+      queryBuilder.andWhere('despesa.descricao LIKE :descricao', { descricao: `%${descricao}%` });
+    }
+  
+    queryBuilder.skip((page - 1) * limit).take(limit);
+    const despesas = await queryBuilder.getMany();
+  
+    if (despesas.length === 0) {
+      throw new NotFoundException(`Despesa de id ${id} não encontrada`);
+    }
+    return despesas;
+  }
+  
 }

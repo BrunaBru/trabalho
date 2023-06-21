@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put,Query } from "@nestjs/common";
 import { DespesaService } from "./despesa.service";
 import { DespesaEntity } from "./despesa.entity";
 import { DespesaDto } from "./despesa.dto";
@@ -17,6 +17,17 @@ export class DespesaController{
         return this.despesaService.findById(id);
     }
 
+    @Get(':id')
+    async findPaginacao(
+      @Param('id') id: string,
+      @Query('page') page: number,
+      @Query('limit') limit: number,
+      @Query('descricao') descricao?: string,
+    ) 
+    {
+        return this.despesaService.findPaginacao(id, page, limit, descricao);
+    }
+    
     @Delete(':id')
     async remove (@Param('id') id :string){
         return await this.despesaService.remove(id);
