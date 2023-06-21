@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "1cf6878f-c7b6-4316-9e2e-3170ac06e768",
+		"name": "Regra negocio das despesas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/despesas",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t    \"categoria\": \"Saude\"\r\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/despesas",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"despesas"
+					]
+				},
+				"description": "Regras de negocio da despesa"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t    \"categoria\": \"Saude\"\r\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/despesas",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"despesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t    \"categoria\": \"Saude\"\r\n\t}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/despesas",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"despesas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
